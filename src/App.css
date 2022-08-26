@@ -1,10 +1,12 @@
-svg {
+.mySvg {
   background-color: yellow;
 }
-
+#root {
+  height: 100vh;
+}
 body,
 #root,
-.App {
+.mySvg {
   display: flex;
   flex-direction: column;
   justify-content: center;

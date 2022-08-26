@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import Viewport from "./viewport.jsx";
 import Buttons from "./buttons.jsx";
 import Inputs from "./inputs.jsx";
+import "../App.css";
 
-function Main() {
+function App() {
   const [svgSize, setSvgSize] = useState({ height: 300, width: 300 });
   const [points, setPoints] = useState([[35, 40]]);
   const zoomIn = () => {
@@ -30,8 +31,8 @@ function Main() {
 
   return (
     <>
+      <Viewport svgSize={svgSize} points={points} />
       <div className="App">
-        <Viewport svgSize={svgSize} points={points} />
         <Inputs onSubmit={onInputSubmit} />
         <p>Svg Height: {svgSize.height}</p>
         <p>Svg Width: {svgSize.width}</p>
@@ -41,4 +42,4 @@ function Main() {
   );
 }
 
-export default Main;
+export default App;
