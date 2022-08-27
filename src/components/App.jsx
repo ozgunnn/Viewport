@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Viewport from "./viewport.jsx";
 import Buttons from "./buttons.jsx";
 import Inputs from "./inputs.jsx";
+import SvgInfo from "./svginfo.jsx";
 import "../App.css";
 
 function App() {
@@ -32,11 +33,9 @@ function App() {
   return (
     <>
       <Viewport svgSize={svgSize} points={points} />
-      <div className="App">
-        <Inputs onSubmit={onInputSubmit} />
-        <p>Svg Height: {svgSize.height}</p>
-        <p>Svg Width: {svgSize.width}</p>
-      </div>
+      <Inputs onSubmit={onInputSubmit} />
+      <SvgInfo svgSize={svgSize} />
+
       <Buttons zoomIn={zoomIn} zoomOut={zoomOut} />
     </>
   );
