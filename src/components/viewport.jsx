@@ -18,12 +18,8 @@ const Viewport = (props) => {
       .querySelector("svg")
       .getAttribute("viewBox")
       .split(" ");
-    const startX = viewBoxValues[0];
-    const startY = viewBoxValues[1];
-    const width = viewBoxValues[2];
-    const height = viewBoxValues[3];
-    //const factor = (e.deltaY / Math.abs(e.deltaY)) * 1.1;
-    const factor = e.deltaY > 0 ? 1.1 : 0.8;
+    const [startX, startY, width, height] = viewBoxValues;
+    const factor = e.deltaY > 0 ? 1.25 : 0.8;
     const newStartX = startX;
     const newStartY = startY;
     const newWidth = width * factor;
