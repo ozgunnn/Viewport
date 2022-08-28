@@ -6,7 +6,11 @@ import SvgInfo from "./svginfo.jsx";
 import "../App.css";
 
 function App() {
-  const [svgSize, setSvgSize] = useState({ height: 300, width: 300 });
+  const initialSize = 500;
+  const [svgSize, setSvgSize] = useState({
+    height: initialSize,
+    width: initialSize,
+  });
   const [points, setPoints] = useState([[35, 40]]);
   const zoomIn = () => {
     setSvgSize({
@@ -32,7 +36,7 @@ function App() {
 
   return (
     <>
-      <Viewport svgSize={svgSize} points={points} />
+      <Viewport initialSize={initialSize} svgSize={svgSize} points={points} />
       <Inputs onSubmit={onInputSubmit} />
       <SvgInfo svgSize={svgSize} />
 
