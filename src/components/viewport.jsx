@@ -1,8 +1,16 @@
 import React, { useState } from "react";
-import { useRef, useEffect } from "react";
 
 const Viewport = (props) => {
   /* Read all the available methods in the documentation */
+  const [mouseCoords, setMouseCoords] = useState({ x: 0.0, y: 0.0 });
+  const [clickCoords, setClickCoords] = useState({ x: 0, y: 0 });
+  const [clickViewBox, setClickViewBox] = useState({
+    startX: 0,
+    startY: 0,
+    width: 0,
+    height: 0,
+  });
+  const [onHold, setOnHold] = useState(false);
 
   const { height, width } = props.svgSize;
   let svgStyle = {
@@ -10,7 +18,29 @@ const Viewport = (props) => {
     width: `${width}px`,
   };
   const handleMouseMove = (e) => {
-    //console.log(e.nativeEvent.offsetX, e.nativeEvent.offsetY);
+    setMouseCoords({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY });
+
+    //console.log(mouseCoords);
+    if (onHold) {
+      let deltaX =
+        ((mouseCoords.x - clickCoords.x) * clickViewBox.width) /
+        props.initialSize;
+      let deltaY =
+        ((mouseCoords.y - clickCoords.y) * clickViewBox.height) /
+        props.initialSize;
+      console.log(deltaX, deltaY);
+
+      const newStartX = parseFloat(clickViewBox.startX) - deltaX;
+      const newStartY = parseFloat(clickViewBox.startY) - deltaY;
+      const newWidth = parseFloat(clickViewBox.width);
+      const newHeight = parseFloat(clickViewBox.height);
+      document
+        .querySelector("svg")
+        .setAttribute(
+          "viewBox",
+          `${newStartX} ${newStartY} ${newWidth} ${newHeight}`
+        );
+    }
   };
 
   const handleWheel = (e) => {
@@ -37,13 +67,40 @@ const Viewport = (props) => {
       );
   };
 
+  const handleMouseClick = (e) => {
+    //console.log(e);
+  };
+
+  const handleMouseDown = (e) => {
+    setOnHold(true);
+    setClickCoords({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY });
+    const viewBoxValues = document
+      .querySelector("svg")
+      .getAttribute("viewBox")
+      .split(" ");
+    const [startX, startY, width, height] = viewBoxValues;
+    setClickViewBox({
+      startX: parseFloat(startX),
+      startY: parseFloat(startY),
+      width: parseFloat(width),
+      height: parseFloat(height),
+    });
+  };
+
+  const handleMouseUp = (e) => {
+    setOnHold(false);
+  };
+
   return (
     <svg
       className="mySvg"
       style={svgStyle}
       onMouseMove={handleMouseMove}
+      onMouseDown={handleMouseDown}
+      onMouseUp={handleMouseUp}
       onWheel={handleWheel}
-      viewBox="0 0 300 300"
+      onClick={handleMouseClick}
+      viewBox="-300 -300 600 600"
     >
       {props.points.map((coord) => (
         <circle
