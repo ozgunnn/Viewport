@@ -39,7 +39,6 @@ function App() {
       <Viewport initialSize={initialSize} svgSize={svgSize} points={points} />
       <Inputs onSubmit={onInputSubmit} />
       <SvgInfo svgSize={svgSize} />
-
       <Buttons zoomIn={zoomIn} zoomOut={zoomOut} />
     </>
   );

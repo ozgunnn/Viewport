@@ -109,7 +109,7 @@ const Viewport = (props) => {
           r="40"
           stroke="black"
           stroke-width="3"
-          fill="red"
+          fill="#7FB77E"
         />
       ))}
     </svg>
