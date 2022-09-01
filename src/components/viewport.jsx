@@ -19,15 +19,14 @@ const Viewport = (props) => {
   };
   const handleMouseMove = (e) => {
     setMouseCoords({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY });
-
     //console.log(mouseCoords);
     if (onHold) {
       let deltaX =
         ((mouseCoords.x - clickCoords.x) * clickViewBox.width) /
-        props.initialSize;
+        props.initialSizeX;
       let deltaY =
         ((mouseCoords.y - clickCoords.y) * clickViewBox.height) /
-        props.initialSize;
+        props.initialSizeY;
       console.log(deltaX, deltaY);
 
       const newStartX = parseFloat(clickViewBox.startX) - deltaX;
@@ -54,9 +53,10 @@ const Viewport = (props) => {
     const [startX, startY, width, height] = viewBoxValues;
     const factor = e.deltaY > 0 ? 1.25 : 0.8;
     const newStartX =
-      parseFloat(startX) + (xCoord / props.initialSize) * (1 - factor) * width;
+      parseFloat(startX) + (xCoord / props.initialSizeX) * (1 - factor) * width;
     const newStartY =
-      parseFloat(startY) + (yCoord / props.initialSize) * (1 - factor) * height;
+      parseFloat(startY) +
+      (yCoord / props.initialSizeY) * (1 - factor) * height;
     const newWidth = width * factor;
     const newHeight = height * factor;
     document
@@ -100,7 +100,7 @@ const Viewport = (props) => {
       onMouseUp={handleMouseUp}
       onWheel={handleWheel}
       onClick={handleMouseClick}
-      viewBox="-300 -300 600 600"
+      viewBox="-300 -300 800 500"
     >
       {props.points.map((coord) => (
         <circle
