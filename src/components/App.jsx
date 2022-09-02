@@ -22,6 +22,8 @@ function App() {
 
   return (
     <>
+      <h4>Use Mouse Wheel to Zoom in and out</h4>
+      <h4>Click and hold to pan</h4>
       <Viewport
         initialSizeX={initialSizeX}
         initialSizeY={initialSizeY}
