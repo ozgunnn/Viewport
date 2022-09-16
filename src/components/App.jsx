@@ -31,7 +31,7 @@ function App() {
         points={points}
       />
       <Inputs onSubmit={onInputSubmit} />
-      <SvgInfo svgSize={svgSize} />
+      {/* <SvgInfo svgSize={svgSize} /> */}
     </>
   );
 }

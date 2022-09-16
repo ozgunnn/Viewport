@@ -20,7 +20,7 @@ const Inputs = (props) => {
       <label>Y: </label>
       <input type="number" name="y" value={node.y} onChange={handleChange} />
       <button className="btn btn-primary add-coordinate-button" type="submit">
-        Add Coordinate
+        Add Circle
       </button>
     </form>
   );
